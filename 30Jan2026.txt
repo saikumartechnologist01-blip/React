@@ -1,0 +1,381 @@
+Template Literals: 
+
+It allows the developer to write multiple lines in a string in a free-style. 
+
+To use template literals, we need to use backtik (``)
+
+syntax:  var template = `
+
+
+`
+
+Before ES6:
+
+var template= "Hello User,  \n\t\t\t Your Subscription is about to end. please renew it before 2nd Feb. \n \t Thanks, \n Product Team";
+console.log(template); 
+
+With ES6:
+
+var template= `Hello User, 
+ 
+      
+              Your Subscription is about to end. please renew it before 2nd Feb.
+  
+
+  Thanks, 
+  Product Team`;
+console.log(template);
+
+To deal with dynamic values, we ${variable_name}
+
+
+ var username ="Kiran";
+ var subscriptionId =1011;
+ var subscriptionendDate = "4th Feb";
+ var note= "The services may suspend if the renewal does not take place";
+
+var template= `Hello ${username}, 
+ 
+      
+              Your Subscription with SID: ${subscriptionId} is about to end. 
+              
+              please renew it before ${subscriptionendDate}.
+
+         Note: ${note}
+  
+
+  Thanks, 
+  Product Team`;
+console.log(template);
+
+
+
+example:
+
+
+   var invoices = [
+    {
+        name: "Kiran",
+        invoiceid:102, 
+        subscriptionId:19999,
+        validity: "9th June 2027",
+        rmContact: "9010101010",
+        regards: "Support Team"
+    },
+    {
+        name: "Ravi",
+        invoiceid:103, 
+        subscriptionId:19899,
+        validity: "9th Aug 2027",
+        rmContact: "9010101012",
+        regards: "Support Team"
+    },
+    {
+        name: "Naveen",
+        invoiceid:106, 
+        subscriptionId:29999,
+        validity: "9th Feb 2027",
+        rmContact: "9010101010",
+        regards: "Support Team"
+    }
+   ]
+
+
+   invoices.forEach( invoice =>{
+         console.log(`
+          Hello  ${invoice.name} , 
+
+   Here is your invoice with ${invoice.invoiceid} for the purchase of the below subscription. 
+
+     subscriptionId : ${invoice.subscriptionId}
+     validity : ${invoice.validity}
+     
+     For any queries, do reach out to your Relationship Manager on ${invoice.rmContact}
+  
+  Thanks,
+   ${invoice.regards}
+          `)
+   })
+
+
+   Object Destructuring: 
+
+   It lets us to pull values out of objects cleanly and declaratively. 
+
+
+  ES5: 
+
+  
+  var user ={
+      name:"Kiran",
+      age:22, 
+      address: "hyderabad"
+  }
+
+  var name = user.name; 
+  var age = user.age;
+
+  console.log(name);
+  console.log(age);
+
+
+  ES6: 
+
+
+
+  var user ={
+      name:"Kiran",
+      age:22, 
+      address: "hyderabad"
+  }
+
+  const {name, age} =user;  // Object destructuring
+
+   console.log(name2);
+  // console.log(age);
+
+
+Default Values: 
+
+
+  var user ={
+    
+      name:"Raj",
+      age:56
+
+  }
+
+  const {name="Kiran", age=21} =user;  // Object destructuring
+
+   console.log(name);
+   console.log(age);
+
+
+Rest Parameter and Spread Operator: 
+
+
+
+Rest Parameter:  It helps in capturing the additional arguments passed into a function 
+as an array. 
+
+ES5: 
+
+
+
+ function f1(a,b){
+   console.log(a);
+   console.log(b);
+
+   console.log(arguments[2]);
+   console.log(arguments[3]);
+ }
+
+ f1(10,20,30,40);
+
+
+ ES6: 
+
+  function f1(a,b,...additionalValues){
+   console.log(a);
+   console.log(b);
+   console.log(additionalValues);
+ }
+
+ f1(10,20,30,40);
+
+
+Rest params with arrow functions: 
+
+var f1= (a,b,...additionalValues) =>{
+   console.log(a);
+   console.log(b);
+   console.log(additionalValues);
+ }
+
+ f1(10,20,30,40);
+
+
+ Rest params with array destructuring:
+
+ 
+
+var array =[10,20,30,40,50]
+
+const [firstValue,...remainingValues] =array; 
+
+console.log(firstValue);
+
+console.log(remainingValues)
+
+
+Spread Operator: 
+
+ES5: 
+
+ function f1(a,b,c){
+
+   console.log(a);
+   console.log(b); // ? 
+   console.log(c);
+
+ }
+
+ var arr=[10,20,30];
+
+ f1(arr[0],arr[1],arr[2]);
+
+ES6:  
+
+ function f1(a,b,c){
+
+   console.log(a);
+   console.log(b); // ? 
+   console.log(c);
+
+ }
+
+ var arr=[10,20,30];
+
+ f1(...arr); // spread operator
+
+
+
+ spread operator combining arrays: 
+
+ var fulltimeEmployees = ["emp1","emp2"];
+var contractEmployees =["emp4","emp5"]; 
+
+var allEmployees =[...fulltimeEmployees,...contractEmployees];
+
+console.log(allEmployees);
+
+console.log(allEmployees.length); // ? 
+
+
+with objects:
+
+var user = {
+     name: "kiran",
+     age: 21
+}
+
+var copy = {...user}; 
+
+copy.name="Raj";
+
+console.log(copy);
+console.log(user);
+
+
+Filter: Used to filter values of an array based on some condition. 
+
+var users = [
+    {
+      name:"kiran", 
+      password: 10
+    },
+     {
+      name:"Raj", 
+      password: 5
+    },
+     {
+      name:"Naveen", 
+      password: 2
+    },
+    {
+      name:"Krish", 
+      password: 12
+    },
+    {
+      name:"John", 
+      password: 15
+    }
+];
+
+   var filteredArray = users.filter((user) => {
+          return user.password <= 8
+   })
+
+   console.log(filteredArray);
+
+
+
+Map: Map is used to update the existing values from the array and returns a new array with 
+updated content. 
+
+
+
+var users = [
+    {
+      name:"kiran", 
+      passwordExpiryInDays: 10
+    },
+     {
+      name:"Raj", 
+      passwordExpiryInDays: -1
+    },
+     {
+      name:"Naveen", 
+      passwordExpiryInDays: 0
+    },
+    {
+      name:"Krish", 
+      passwordExpiryInDays: -2
+    },
+    {
+      name:"John", 
+      passwordExpiryInDays: 15
+    }
+];
+
+
+
+    var finalResult =  users.map( (user) => {
+
+             if(user.passwordExpiryInDays <= 0){
+                 user.passwordExpiryInDays = 7;
+             }
+
+             return user;
+
+     })
+
+     console.log(finalResult);
+
+
+Reduce: 
+
+Reduces the array to a single value. 
+
+
+const overallBalance = [12000,78788,645656,76767,65656,4545]; 
+
+// ES5
+
+  var sum = 0; 
+
+  for(var i=0; i<overallBalance.length; i++){
+        sum += overallBalance[i];
+  }
+  console.log(sum);
+
+  // ES6
+
+var finalBalance = overallBalance.reduce((acm,value) => acm + value,0);
+
+console.log(finalBalance);
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
